@@ -58,20 +58,17 @@
     # Used with `nixos-rebuild --flake .#<hostname>`
     # nixosConfigurations."<hostname>".config.system.build.toplevel must be a derivation
     nixosConfigurations = {
-      jhollowell-laptop = nixpkgs.lib.nixosSystem rec {
+      jhollowell-frmwk = nixpkgs.lib.nixosSystem rec {
         system = x86;
-        specialArgs = {
-          pkgs-me = import nixpkgs-me {inherit system;};
-        };
         modules = [
           ./configuration.nix
           agenix.nixosModules.default
           nixos-common.nixosModules.users
-          nixos-common.nixosModules.workloads.ssh
           nixos-common.nixosModules.env.common
           nixos-common.nixosModules.net.firewall
           nixos-common.nixosModules.net.tailscale
           nixos-common.nixosModules.workloads.diag
+          nixos-common.nixosModules.workloads.plasma
 
           home-manager.nixosModules.home-manager
           {

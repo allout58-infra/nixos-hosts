@@ -1,17 +1,14 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{...}: {
   imports = [
     ./hardware-configuration.nix
   ];
-
+  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos-media";
+  networking.hostName = "jhollowell-frmwk";
 
+  # Enable networking
   networking.networkmanager.enable = true;
 
   # This value determines the NixOS release from which the default
