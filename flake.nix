@@ -10,11 +10,13 @@
   inputs.nixpkgs-me.url = "github:allout58/nixpkgs";
 
   # region AgeNix
-  inputs.agenix.url = "github:ryantm/agenix";
-  # optional, not necessary for the module
-  inputs.agenix.inputs.nixpkgs.follows = "nixpkgs";
-  # optionally choose not to download darwin deps (saves some resources on Linux)
-  inputs.agenix.inputs.darwin.follows = "";
+  inputs.agenix = {
+    url = "github:ryantm/agenix";
+    # optional, not necessary for the module
+    inputs.nixpkgs.follows = "nixpkgs";
+    # optionally choose not to download darwin deps (saves some resources on Linux)
+    inputs.darwin.follows = "";
+  };
   # endregion
 
   inputs.home-manager = {
@@ -27,6 +29,11 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
+  inputs.nixos-wsl = {
+    url = "github:nix-community/NixOS-WSL/main";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
   # It is also possible to "inherit" an input from another input. This is useful to minimize
   # flake dependencies. For example, the following sets the nixpkgs input of the top-level flake
   # to be equal to the nixpkgs input of the nixops input of the top-level flake:
@@ -36,47 +43,70 @@
   # Work-in-progress: refer to parent/sibling flakes in the same repository
   # inputs.c-hello.url = "path:../c-hello";
 
-  outputs =
-    all @ { self
-    , nixpkgs
-    , agenix
-    , nixos-common
-    , nixpkgs-me
-    , home-manager
-    , ...
-    }:
-    {
-      # Used with `nixos-rebuild --flake .#<hostname>`
-      # nixosConfigurations."<hostname>".config.system.build.toplevel must be a derivation
-      nixosConfigurations = {
-
-        jhollowell-laptop = nixpkgs.lib.nixosSystem rec {
-          system = "x86-64";
-          specialArgs = {
-            pkgs-me = import nixpkgs-me { inherit system; };
-          };
-          modules = [
-            ./configuration.nix
-            agenix.nixosModules.default
-            nixos-common.nixosModules.users
-            nixos-common.nixosModules.workloads.ssh
-            nixos-common.nixosModules.env.common
-            nixos-common.nixosModules.net.firewall
-            nixos-common.nixosModules.net.tailscale
-            nixos-common.nixosModules.workloads.diag
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-
-              home-manager.users.jhollowell = nixos-common.nixosModules.home-manager.jhollowell;
-            }
-          ];
+  outputs = all @ {
+    self,
+    nixpkgs,
+    agenix,
+    nixos-common,
+    nixpkgs-me,
+    home-manager,
+    nixos-wsl,
+    ...
+  }: let
+    x86 = "x86_64-linux";
+  in {
+    # Used with `nixos-rebuild --flake .#<hostname>`
+    # nixosConfigurations."<hostname>".config.system.build.toplevel must be a derivation
+    nixosConfigurations = {
+      jhollowell-laptop = nixpkgs.lib.nixosSystem rec {
+        system = x86;
+        specialArgs = {
+          pkgs-me = import nixpkgs-me {inherit system;};
         };
-      };
+        modules = [
+          ./configuration.nix
+          agenix.nixosModules.default
+          nixos-common.nixosModules.users
+          nixos-common.nixosModules.workloads.ssh
+          nixos-common.nixosModules.env.common
+          nixos-common.nixosModules.net.firewall
+          nixos-common.nixosModules.net.tailscale
+          nixos-common.nixosModules.workloads.diag
 
-      # format the nix code in this flake
-      # alejandra is a nix formatter with a beautiful output
-      formatter.x86-64 = nixpkgs.legacyPackages.x86-64.alejandra;
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+
+            home-manager.users.jhollowell = nixos-common.nixosModules.home-manager.jhollowell;
+          }
+        ];
+      };
+      jth-gaming-desktop-wsl = nixpkgs.lib.nixosSystem rec {
+        system = x86;
+        module = [
+          nixos-wsl.mixosModules.default
+          ./wsl/config.nix
+          agenix.nixosModules.default
+          nixos-common.nixosModules.users
+          nixos-common.nixosModules.env.common
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+
+            home-manager.users.jhollowell = nixos-common.nixosModules.home-manager.jhollowell;
+          }
+
+          {
+            networking.hostName = "jth-gaming-desktop";
+            system.stateVersion = "24.05";
+          }
+        ];
+      };
     };
+
+    # format the nix code in this flake
+    # alejandra is a nix formatter with a beautiful output
+    formatter.${x86} = nixpkgs.legacyPackages.${x86}.alejandra;
+  };
 }
