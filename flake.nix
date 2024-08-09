@@ -61,12 +61,12 @@
       jhollowell-frmwk = nixpkgs.lib.nixosSystem rec {
         system = x86;
         modules = [
-          ./configuration.nix
-          agenix.nixosModules.default
+          ./jhollowell-frmwk
+          # agenix.nixosModules.default
           nixos-common.nixosModules.users
           nixos-common.nixosModules.env.common
           nixos-common.nixosModules.net.firewall
-          nixos-common.nixosModules.net.tailscale
+          # nixos-common.nixosModules.net.tailscale
           nixos-common.nixosModules.workloads.diag
           nixos-common.nixosModules.workloads.plasma
 
