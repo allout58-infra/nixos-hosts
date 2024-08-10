@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -7,6 +7,20 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "jhollowell-frmwk";
+
+  services.fwupd.enable = true;
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.jhollowell = {
+    isNormalUser = true;
+    description = "James Hollowell";
+    extraGroups = ["networkmanager" "wheel"];
+    packages = with pkgs; [
+      kdePackages.kate
+      #  thunderbird
+    ];
+    initialPassword = "password1";
+  };
 
   # Enable networking
   networking.networkmanager.enable = true;

@@ -19,6 +19,8 @@
   };
   # endregion
 
+  inputs.nixos-hardware.url = "github:NixOS/nixos-hardware";
+
   inputs.home-manager = {
     url = "github:nix-community/home-manager/release-24.05";
     inputs.nixpkgs.follows = "nixpkgs";
@@ -51,6 +53,7 @@
     nixpkgs-me,
     home-manager,
     nixos-wsl,
+    nixos-hardware,
     ...
   }: let
     x86 = "x86_64-linux";
@@ -62,10 +65,11 @@
         system = x86;
         modules = [
           ./jhollowell-frmwk
+          nixos-hardware.nixosModules.framework-13-7040-amd
           # agenix.nixosModules.default
-          nixos-common.nixosModules.users
+          #           nixos-common.nixosModules.users
           nixos-common.nixosModules.env.common
-          nixos-common.nixosModules.net.firewall
+          #           nixos-common.nixosModules.net.firewall
           # nixos-common.nixosModules.net.tailscale
           nixos-common.nixosModules.workloads.diag
           nixos-common.nixosModules.workloads.plasma
