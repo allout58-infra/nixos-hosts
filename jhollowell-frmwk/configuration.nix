@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
+    ./software.nix
   ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
