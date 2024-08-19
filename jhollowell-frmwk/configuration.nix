@@ -18,10 +18,6 @@
     isNormalUser = true;
     description = "James Hollowell";
     extraGroups = ["networkmanager" "wheel"];
-    packages = with pkgs; [
-      kdePackages.kate
-      #  thunderbird
-    ];
     initialPassword = "password1";
   };
 

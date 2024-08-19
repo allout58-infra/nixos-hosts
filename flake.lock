@@ -3,18 +3,20 @@
     "agenix": {
       "inputs": {
         "darwin": [],
-        "home-manager": "home-manager",
+        "home-manager": [
+          "home-manager"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ],
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1722339003,
-        "narHash": "sha256-ZeS51uJI30ehNkcZ4uKqT4ZDARPyqrHADSKAwv5vVCU=",
+        "lastModified": 1723293904,
+        "narHash": "sha256-b+uqzj+Wa6xgMS9aNbX4I+sXeb5biPDi39VgvSFqFvU=",
         "owner": "ryantm",
         "repo": "agenix",
-        "rev": "3f1dae074a12feb7327b4bf43cbac0d124488bb7",
+        "rev": "f6291c5935fdc4e0bef208cfc0dcab7e3f7a1c41",
         "type": "github"
       },
       "original": {
@@ -77,27 +79,6 @@
     "home-manager": {
       "inputs": {
         "nixpkgs": [
-          "agenix",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1703113217,
-        "narHash": "sha256-7ulcXOk63TIT2lVDSExj7XzFx09LpdSAPtvgtM7yQPE=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "3bfaacf46133c037bb356193bd2f1765d9dc82c1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "home-manager_2": {
-      "inputs": {
-        "nixpkgs": [
           "nixpkgs"
         ]
       },
@@ -118,17 +99,20 @@
     },
     "nixos-common": {
       "inputs": {
+        "agenix": [
+          "agenix"
+        ],
         "allout58-dotfiles": "allout58-dotfiles",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1723256497,
-        "narHash": "sha256-YFgXWSsqlnygEhjuPCgOzAjmVZOyJs7HiTrDkRmLblc=",
+        "lastModified": 1724017145,
+        "narHash": "sha256-ggeJKV1pc/KVytY5Z/TRpxp/N9fiHzjZJnl6SK9exrE=",
         "owner": "allout58-infra",
         "repo": "nixos-common",
-        "rev": "e9abf1371752984c72ef9a07e129d005702743ee",
+        "rev": "3ae9a41b46ab48b32cb962a384ded64a60d8550d",
         "type": "github"
       },
       "original": {
@@ -139,11 +123,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1723149858,
-        "narHash": "sha256-3u51s7jdhavmEL1ggtd8wqrTH2clTy5yaZmhLvAXTqc=",
+        "lastModified": 1723310128,
+        "narHash": "sha256-IiH8jG6PpR4h9TxSGMYh+2/gQiJW9MwehFvheSb5rPc=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "107bb46eef1f05e86fc485ee8af9b637e5157988",
+        "rev": "c54cf53e022b0b3c1d3b8207aa0f9b194c24f0cf",
         "type": "github"
       },
       "original": {
@@ -177,11 +161,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1722987190,
-        "narHash": "sha256-68hmex5efCiM2aZlAAEcQgmFI4ZwWt8a80vOeB/5w3A=",
+        "lastModified": 1723688146,
+        "narHash": "sha256-sqLwJcHYeWLOeP/XoLwAtYjr01TISlkOfz+NG82pbdg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "21cc704b5e918c5fbf4f9fff22b4ac2681706d90",
+        "rev": "c3d4ac725177c030b1e289015989da2ad9d56af0",
         "type": "github"
       },
       "original": {
@@ -193,11 +177,11 @@
     },
     "nixpkgs-me": {
       "locked": {
-        "lastModified": 1722479783,
-        "narHash": "sha256-lksjzvgmKZBb8zjMxCzkJc7wFz4jkZ/brsVBXv7F5RA=",
+        "lastModified": 1723734733,
+        "narHash": "sha256-nrIHerj/7M4Ugxh1Vb4rOXY43EQZRbsknx/q1Sa1awg=",
         "owner": "allout58",
         "repo": "nixpkgs",
-        "rev": "cad57c2f18f17de04e790fe24b8d0c03f364417f",
+        "rev": "7dd6896c58ec460a7b3570b13f2152fe586c2d00",
         "type": "github"
       },
       "original": {
@@ -208,11 +192,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1723175592,
-        "narHash": "sha256-M0xJ3FbDUc4fRZ84dPGx5VvgFsOzds77KiBMW/mMTnI=",
+        "lastModified": 1723637854,
+        "narHash": "sha256-med8+5DSWa2UnOqtdICndjDAEjxr5D7zaIiK4pn0Q7c=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5e0ca22929f3342b19569b21b2f3462f053e497b",
+        "rev": "c3aa7b8938b17aebd2deecf7be0636000d62a2b9",
         "type": "github"
       },
       "original": {
@@ -225,7 +209,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
-        "home-manager": "home-manager_2",
+        "home-manager": "home-manager",
         "nixos-common": "nixos-common",
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",

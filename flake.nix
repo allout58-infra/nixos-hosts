@@ -18,6 +18,7 @@
     inputs.nixpkgs.follows = "nixpkgs";
     # optionally choose not to download darwin deps (saves some resources on Linux)
     inputs.darwin.follows = "";
+    inputs.home-manager.follows = "home-manager";
   };
   # endregion
 
@@ -31,6 +32,7 @@
   inputs.nixos-common = {
     url = "github:allout58-infra/nixos-common";
     inputs.nixpkgs.follows = "nixpkgs";
+    inputs.agenix.follows = "agenix";
   };
 
   inputs.nixos-wsl = {
@@ -70,6 +72,7 @@
           pkgs-unstable = import nixpkgs-unstable {inherit system;};
         };
         modules = [
+          nixos-common.nixosModules.latestNix
           ./jhollowell-frmwk
           nixos-hardware.nixosModules.framework-13-7040-amd
           # agenix.nixosModules.default
