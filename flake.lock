@@ -108,11 +108,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1724017145,
-        "narHash": "sha256-ggeJKV1pc/KVytY5Z/TRpxp/N9fiHzjZJnl6SK9exrE=",
+        "lastModified": 1724033245,
+        "narHash": "sha256-JpjXcbP2eWM7Jrsa1CmmPGei87A3oRFDKZsDCOySZxU=",
         "owner": "allout58-infra",
         "repo": "nixos-common",
-        "rev": "3ae9a41b46ab48b32cb962a384ded64a60d8550d",
+        "rev": "83483582b35f0f6f86db2c37e8594ea787cd6833",
         "type": "github"
       },
       "original": {

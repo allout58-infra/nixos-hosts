@@ -91,6 +91,18 @@
           }
         ];
       };
+      nas = nixpkgs.lib.nixosSystem rec {
+        system = x86;
+        modules = [
+          ./nas
+          agenix.nixosModules.default
+          nixos-common.nixosModule.users
+          nixos-common.nixosModules.env.common
+          nixos-common.nixosModules.net.firewall
+          nixos-common.nixosModules.net.tailscale
+          nixos-common.nixosModules.workloads.diag
+        ];
+      };
       jth-gaming-desktop-wsl = nixpkgs.lib.nixosSystem rec {
         system = x86;
         module = [
