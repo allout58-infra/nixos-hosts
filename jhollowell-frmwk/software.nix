@@ -17,6 +17,9 @@
     spotify
 
     vscode
+    gh
+    direnv
+    nix-direnv
   ];
 
   services = {
