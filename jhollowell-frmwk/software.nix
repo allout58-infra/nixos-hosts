@@ -4,7 +4,7 @@
   config,
   ...
 }: {
-  users.users.jhollowell.packages = with pkgs; [
+  users.users.jhollowell.packages = with pkgs-unstable; [
     obsidian
     syncthing
     syncthingtray
@@ -18,15 +18,24 @@
 
     vscode
     gh
-    direnv
-    nix-direnv
   ];
+
+  fonts.packages = [ pkgs.fira-code-nerdfont ];
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 
   services = {
     tailscale = {
       enable = true;
       package = pkgs-unstable.tailscale;
     };
+  };
+
+  environment.sessionVariables = {
+    MOZ_USE_XINPUT2="1";
   };
 
   networking.firewall = {
