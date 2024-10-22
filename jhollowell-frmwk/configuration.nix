@@ -2,6 +2,7 @@
   imports = [
     ./hardware-configuration.nix
     ./software.nix
+    ./sdr.nix
   ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -12,6 +13,9 @@
   networking.hostName = "jhollowell-frmwk";
 
   services.fwupd.enable = true;
+  
+  # Disable Login with fprint due to https://github.com/NixOS/nixpkgs/issues/239770. Still allows fingerprint for unlock and sudo
+  security.pam.services.login.fprintAuth = false;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jhollowell = {

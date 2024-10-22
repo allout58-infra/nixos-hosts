@@ -4,7 +4,7 @@
   config,
   ...
 }: {
-  users.users.jhollowell.packages = with pkgs-unstable; [
+  users.users.jhollowell.packages = with pkgs; [
     obsidian
     syncthing
     syncthingtray
@@ -18,9 +18,11 @@
 
     vscode
     gh
+
+    pkgs-unstable.esphome
   ];
 
-  fonts.packages = [ pkgs.fira-code-nerdfont ];
+  fonts.packages = [pkgs.fira-code-nerdfont];
 
   programs.direnv = {
     enable = true;
@@ -35,7 +37,7 @@
   };
 
   environment.sessionVariables = {
-    MOZ_USE_XINPUT2="1";
+    MOZ_USE_XINPUT2 = "1";
   };
 
   networking.firewall = {

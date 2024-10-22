@@ -69,7 +69,10 @@
       jhollowell-frmwk = nixpkgs.lib.nixosSystem rec {
         system = x86;
         specialArgs = {
-          pkgs-unstable = import nixpkgs-unstable {inherit system; config.allowUnfree = true;};
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
         };
         modules = [
           nixos-common.nixosModules.latestNix

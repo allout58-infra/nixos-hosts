@@ -7,7 +7,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "jhollowell-frmwk";
+  networking.hostName = "nas.home.jameshollowell.com";
 
   services.fwupd.enable = true;
 
