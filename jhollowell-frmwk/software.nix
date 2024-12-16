@@ -20,6 +20,9 @@
     gh
 
     pkgs-unstable.esphome
+
+    vlc
+    bitwarden-cli
   ];
 
   fonts.packages = [pkgs.fira-code-nerdfont];
