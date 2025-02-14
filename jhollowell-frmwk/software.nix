@@ -23,6 +23,7 @@
 
     vlc
     bitwarden-cli
+    warp-terminal
   ];
 
   fonts.packages = [pkgs.fira-code-nerdfont];
