@@ -40,7 +40,7 @@
     };
     printing = {
       enable = true;
-      drivers = with pkgs; [ brlaser ];
+      drivers = with pkgs; [brlaser];
     };
   };
 
