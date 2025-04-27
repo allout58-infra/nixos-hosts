@@ -38,6 +38,10 @@
       enable = true;
       package = pkgs-unstable.tailscale;
     };
+    printing = {
+      enable = true;
+      drivers = with pkgs; [ brlaser ];
+    };
   };
 
   environment.sessionVariables = {
