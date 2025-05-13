@@ -24,6 +24,8 @@
     vlc
     bitwarden-cli
     warp-terminal
+
+    steam-run
   ];
 
   fonts.packages = [pkgs.fira-code-nerdfont];
@@ -56,4 +58,11 @@
   };
 
   programs.nh.flake = "/home/jhollowell/nix-repos/nixos-hosts";
+
+  
+  services.udev.packages = [ 
+    pkgs.platformio-core
+    pkgs.openocd
+  ];
+
 }
