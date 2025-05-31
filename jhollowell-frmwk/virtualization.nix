@@ -7,13 +7,18 @@
 
   virtualisation.spiceUSBRedirection.enable = true;
 
-  environment = {
-    systemPackages = [
-      (pkgs.writeShellScriptBin "qemu-system-x86_64-uefi" ''
-        qemu-system-x86_64 \
-          -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
-          "$@"
-      '')
-    ];
+  environment.systemPackages = [
+    (pkgs.writeShellScriptBin "qemu-system-x86_64-uefi" ''
+      qemu-system-x86_64 \
+        -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
+        "$@"
+    '')
+    pkgs.podman-compose
+    pkgs.distrobox
+  ];
+
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
   };
 }

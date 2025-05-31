@@ -59,10 +59,8 @@
 
   programs.nh.flake = "/home/jhollowell/nix-repos/nixos-hosts";
 
-  
-  services.udev.packages = [ 
+  services.udev.packages = [
     pkgs.platformio-core
     pkgs.openocd
   ];
-
 }

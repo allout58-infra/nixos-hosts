@@ -5,11 +5,9 @@
   # https://nixos.org/manual/nix/unstable/command-ref/new-cli/nix3-flake.html#flake-inputs
 
   # The release branch of the NixOS/nixpkgs repository on GitHub.
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 
   inputs.nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-  inputs.nixpkgs-me.url = "github:allout58/nixpkgs";
 
   # region AgeNix
   inputs.agenix = {
@@ -55,7 +53,6 @@
     nixpkgs-unstable,
     agenix,
     nixos-common,
-    nixpkgs-me,
     home-manager,
     nixos-wsl,
     nixos-hardware,
