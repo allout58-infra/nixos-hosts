@@ -1,21 +1,21 @@
 {
   pkgs,
-  pkgs-unstable,
+  pkgs-stable,
   config,
   ...
 }: {
   users.users.jhollowell = {
-    packages = with pkgs-unstable; [
-      sdrpp
+    packages = with pkgs; [
+      pkgs-stable.sdrpp
       rtl-sdr
       wsjtx
 
-      direwolf
+      pkgs-stable.direwolf
 
       hamlib # rigctrl
 
-      dsd
-      mbelib
+      # dsd # removed
+      pkgs-stable.mbelib
 
       hamrs # logger
       tqsl # ARRL Logbook of the world

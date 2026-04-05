@@ -5,9 +5,9 @@
   # https://nixos.org/manual/nix/unstable/command-ref/new-cli/nix3-flake.html#flake-inputs
 
   # The release branch of the NixOS/nixpkgs repository on GitHub.
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-  inputs.nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs.nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
 
   # region AgeNix
   inputs.agenix = {
@@ -23,8 +23,8 @@
   inputs.nixos-hardware.url = "github:NixOS/nixos-hardware";
 
   inputs.home-manager = {
-    url = "github:nix-community/home-manager/release-24.11";
-    inputs.nixpkgs.follows = "nixpkgs";
+    url = "github:nix-community/home-manager/release-25.11";
+    inputs.nixpkgs.follows = "nixpkgs-stable";
   };
 
   inputs.nixos-common = {
@@ -38,6 +38,8 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
+  inputs.nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+
   # It is also possible to "inherit" an input from another input. This is useful to minimize
   # flake dependencies. For example, the following sets the nixpkgs input of the top-level flake
   # to be equal to the nixpkgs input of the nixops input of the top-level flake:
@@ -50,12 +52,13 @@
   outputs = all @ {
     self,
     nixpkgs,
-    nixpkgs-unstable,
+    nixpkgs-stable,
     agenix,
     nixos-common,
     home-manager,
     nixos-wsl,
     nixos-hardware,
+    nix-flatpak,
     ...
   }: let
     x86 = "x86_64-linux";
@@ -66,12 +69,13 @@
       jhollowell-frmwk = nixpkgs.lib.nixosSystem rec {
         system = x86;
         specialArgs = {
-          pkgs-unstable = import nixpkgs-unstable {
+          pkgs-stable = import nixpkgs-stable {
             inherit system;
             config.allowUnfree = true;
           };
         };
         modules = [
+          nix-flatpak.nixosModules.nix-flatpak
           nixos-common.nixosModules.latestNix
           ./jhollowell-frmwk
           nixos-hardware.nixosModules.framework-13-7040-amd

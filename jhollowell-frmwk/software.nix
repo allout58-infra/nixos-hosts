@@ -1,34 +1,41 @@
 {
   pkgs,
-  pkgs-unstable,
   config,
   ...
 }: {
+  services.flatpak.packages = [
+    # Communication
+    "us.zoom.Zoom"
+    "com.discordapp.Discord"
+    "com.slack.Slack"
+    "im.riot.Riot" # Element
+
+    "com.spotify.Client"
+
+    "com.visualstudio.code"
+
+    "md.obsidian.Obsidian"
+  ];
+
   users.users.jhollowell.packages = with pkgs; [
-    obsidian
     syncthing
     syncthingtray
     nixd
-    # Communication
-    slack
-    element-desktop
-    discord
 
-    spotify
-
-    vscode
     gh
 
-    pkgs-unstable.esphome
+    esphome
 
     vlc
     bitwarden-cli
     warp-terminal
 
     steam-run
+
+    devenv
   ];
 
-  fonts.packages = [pkgs.fira-code-nerdfont];
+  fonts.packages = [pkgs.nerd-fonts.fira-code];
 
   programs.direnv = {
     enable = true;
@@ -38,7 +45,7 @@
   services = {
     tailscale = {
       enable = true;
-      package = pkgs-unstable.tailscale;
+      package = pkgs.tailscale;
     };
     printing = {
       enable = true;
