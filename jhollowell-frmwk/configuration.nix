@@ -27,7 +27,10 @@
   };
 
   # Enable automatic updates for managed flatpaks
-  services.flatpak.update.auto.enable = true;
+  services.flatpak = {
+    enable = true;
+    update.auto.enable = true;
+  };
 
   # Enable cachix for devenv
   nix.extraOptions = ''

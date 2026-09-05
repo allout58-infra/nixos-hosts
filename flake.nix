@@ -38,6 +38,11 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
+  inputs.claude-code = {
+    url = "github:sadjow/claude-code-nix";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
   inputs.nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
   # It is also possible to "inherit" an input from another input. This is useful to minimize
@@ -59,6 +64,7 @@
     nixos-wsl,
     nixos-hardware,
     nix-flatpak,
+    claude-code,
     ...
   }: let
     x86 = "x86_64-linux";
@@ -87,6 +93,11 @@
           nixos-common.nixosModules.workloads.diag
           nixos-common.nixosModules.workloads.plasma
 
+          {
+            nixpkgs.overlays = [claude-code.overlays.default];
+            environment.systemPackages = [claude-code.packages.${system}.claude-code];
+          }
+
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -109,8 +120,8 @@
       };
       jth-gaming-desktop-wsl = nixpkgs.lib.nixosSystem rec {
         system = x86;
-        module = [
-          nixos-wsl.mixosModules.default
+        modules = [
+          nixos-wsl.nixosModules.default
           ./wsl/config.nix
           agenix.nixosModules.default
           nixos-common.nixosModules.users

@@ -12,7 +12,7 @@
 
     "com.spotify.Client"
 
-    "com.visualstudio.code"
+#    "com.visualstudio.code"
 
     "md.obsidian.Obsidian"
   ];
@@ -30,7 +30,13 @@
     bitwarden-cli
     warp-terminal
 
+    vscode.fhs # Flatpak is even more restrictive than nix pkg, so stick with nix pkg
+
     steam-run
+
+    nix
+
+    ghostty
 
     devenv
   ];
