@@ -20,7 +20,10 @@
   };
   # endregion
 
-  inputs.nixos-hardware.url = "github:NixOS/nixos-hardware";
+  inputs.nixos-hardware = {
+    url = "github:NixOS/nixos-hardware";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 
   inputs.home-manager = {
     url = "github:nix-community/home-manager/release-25.11";
@@ -43,7 +46,10 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  inputs.nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+  inputs.nix-flatpak = {
+    url = "github:gmodena/nix-flatpak/?ref=latest";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 
   # It is also possible to "inherit" an input from another input. This is useful to minimize
   # flake dependencies. For example, the following sets the nixpkgs input of the top-level flake
@@ -111,7 +117,7 @@
         modules = [
           ./nas
           agenix.nixosModules.default
-          nixos-common.nixosModule.users
+          nixos-common.nixosModules.users
           nixos-common.nixosModules.env.common
           nixos-common.nixosModules.net.firewall
           nixos-common.nixosModules.net.tailscale
@@ -132,11 +138,6 @@
             home-manager.useGlobalPkgs = true;
 
             home-manager.users.jhollowell = nixos-common.nixosModules.home-manager.jhollowell;
-          }
-
-          {
-            networking.hostName = "jth-gaming-desktop";
-            system.stateVersion = "24.05";
           }
         ];
       };

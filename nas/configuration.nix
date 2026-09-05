@@ -1,4 +1,8 @@
 {pkgs, ...}: {
+  # WIP: not buildable yet. ./hardware-configuration.nix must be generated
+  # via `nixos-generate-config` on the physical NAS machine, and
+  # `networking.hostId` (required for ZFS) must be set to a value generated
+  # on that machine before this host will evaluate/build.
   imports = [
     ./hardware-configuration.nix
     ./software.nix
@@ -7,7 +11,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nas.home.jameshollowell.com";
+  networking.hostName = "nas";
+  networking.domain = "home.jameshollowell.com";
 
   services.fwupd.enable = true;
 
